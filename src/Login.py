@@ -13,7 +13,7 @@ class Contenedor:
         self.label.grid(sticky='w')
         self.entry.grid()
 
-    def agregarframe(self):
+    def agregarFrame(self):
         self.frame.pack()
 
 

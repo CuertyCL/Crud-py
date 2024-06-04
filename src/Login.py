@@ -9,7 +9,7 @@ class Contenedor:
         self.texto = texto
         self.frame = tk.Frame(root, pady=10, width=270, height=40)
 
-
+    # Encabezado
     def addTitle(self):
         self.image = tk.PhotoImage(file="imagen_sin_fondo.png", width=100, height=100)
         self.label = ttk.Label(self.frame, image=self.image)
@@ -18,6 +18,7 @@ class Contenedor:
         self.titulo.pack(pady=16)
 
 
+    # Formularios
     def addLabelEntry(self):
         self.label = tk.Label(self.frame, text=self.texto, font=('Helvetica', 11))
         self.entry = ttk.Entry(self.frame, width=20, font=('Helvetica', 10))

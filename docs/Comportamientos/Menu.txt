@@ -1,0 +1,21 @@
+==============================
+    Funcionamiento de Menu
+==============================
+
+1. Se abre "Ventana Menu".
+
+2. El usuario elige una opción
+
+    2.1. Si elige "Ver Stock", se cierra "Ventana Menu" y se abre "Ventana Inventario".
+    
+    2.2. Si elige "Modificar Stock", se cierra "Ventana Menu" y se abre "Ventana Modificar Stock".
+    
+    2.3. Si elige "Añadir Producto", se cierra "Ventana Menu" y se abre "Ventana Añadir Producto".
+    
+    2.4. Si elige "Eliminar Producto", se cierra "Ventana Menu" y se abre "Ventana Eliminar Producto".
+    
+    2.5. Si elige "Opciones", se abre "Ventana Opciones".
+    
+    2.6. Si elige "Cerrar Sesión", se cierra "Ventana Menu" y termina el programa.
+    
+3. Cuando se cierra alguna ventana elegida (a exepción de "Cerrar Sesión"), se vuelve a abrir "Ventana Menu" 

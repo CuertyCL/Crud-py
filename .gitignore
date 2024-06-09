@@ -1,6 +1,9 @@
 # Ignora archivos creados por jetbrains
 **/.idea/
-# import sqlite3
 
+# Ignorar directorios cache de python
 __pycache__/
 *.pyc
+
+# Ignorar entorno virtual de python
+**/venv/

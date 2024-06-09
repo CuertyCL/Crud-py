@@ -1,0 +1,11 @@
+==============================
+    Funcionamiento de Login
+==============================
+
+1. Se abre "Ventana Login".
+2. El usuario ingresa los datos en los formularios respectivos ("USUARIO", "CONTRASEÑA").
+3. Al dar click a "Iniciar Sesión", se envian los datos al controlador.
+4. El controlador realiza la consulta a la Base de Datos "usuarios.db" (Solicita los datos donde tanto "USUARIO" y "CONTRASEÑA" coinciden).
+4.1. Si la Base de Datos no existe, el controlador abre una ventana emergente indicando que la Base de Datos no existe
+5. Si la Base de Datos devuelve un resultado, el controlador cierra "Ventana Login" y abre "Ventana Menu". 
+6. Si la Base de Datos no devuelve un resultado, "Ventana Login" no se cierra y se repite el proceso desde el punto 2.

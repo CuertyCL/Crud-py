@@ -1,4 +1,4 @@
-import Elementos as elem
+import vista.Elementos as elem
 
 root = elem.Ventana()
 root.menu("Inicio")

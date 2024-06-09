@@ -1,7 +1,6 @@
 import tkinter as tk
 import tkinter.ttk as ttk
-import Elementos as cont
-#import sqlite3
+import vista.Elementos as cont
 
 login = tk.Tk()
 

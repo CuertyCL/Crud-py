@@ -1,15 +1,41 @@
 import tkinter as tk
 import tkinter.ttk as ttk
-from model.Verificacion import Verificacion
+from controller.Verificador import Verificador
 
-class Login(tk.Frame):
-    def __init__(self, root):
-        self.root = root
-        super().__init__(root)
-        self.pack(side="top", expand=True, fill="both")
+VER = Verificador()
+
+class Login(tk.Tk):
+    def __init__(self):
+        super().__init__()
         self.user = None
         self.passwd = None
         self.open = True
+        self.ventana("Iniciar Sesión", "INICIAR SESIÓN")
+
+    def ventana(self, titulo=None, texto=None):
+        if titulo is None:
+            self.titulo = "Ventana"
+        else:
+            self.titulo = titulo
+
+        if texto is None:
+            self.texto = "SAMPLE TEXT"
+        else:
+            self.texto = texto
+
+        ancho = 350
+        alto = 430
+
+    # Posición en pantalla al iniciar
+    # La posicion de la ventana al iniciar será en el centro  
+        x = (self.winfo_screenwidth()//2)-(ancho//2)
+        y = (self.winfo_screenheight()//2)-(alto//2)
+
+        self.geometry('{}x{}+{}+{}'.format(ancho, alto, x, y))
+        self.resizable(False, False)
+
+        self.title(titulo)
+        self.add_contenido(self.texto)
         
 
     def add_contenido(self, titulo):
@@ -45,7 +71,7 @@ class Login(tk.Frame):
 
         # Boton
         # comando: command= lambda: Verificador.iniciarsesion(root, user, passwd)
-        button = ttk.Button(self, text="Iniciar Sesión", command=self.iniciarsesion)
+        button = ttk.Button(self, text="Iniciar Sesión", command= lambda: VER.iniciarsesion(self, self.userentry, self.passwdentry))
         
         button.pack(side="top", expand=True, ipady=6, ipadx=10)
 
@@ -58,14 +84,5 @@ class Login(tk.Frame):
 
     def get_open(self):
         return self.open
-
-    def iniciarsesion(self):
-        self.set_datos()
-        user, passwd = self.get_datos()
-        v = Verificacion()
-        if v.verificar(user, passwd):
-            self.open = False
-
-    
 
 

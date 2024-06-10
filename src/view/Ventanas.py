@@ -6,6 +6,7 @@ import tkinter.ttk as ttk
 class Ventana(tk.Tk):
     def __init__(self):
         super().__init__()
+        self.ventana_inicio("Iniciar Sesión", )
 
     # Ventana tanto para el login como para el
     # menu de inicio. Tambien puede servir para otras ventanas

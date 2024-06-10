@@ -5,7 +5,7 @@ class Verificacion:
     def __init__(self):
         pass
 
-    def verificar(self, usuario, contraseña):
+    def verificar(usuario, contraseña):
         # Iniciar Conexion
         conn = sqlite3.connect("usuarios.db")
         cur = conn.cursor()

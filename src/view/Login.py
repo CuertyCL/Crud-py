@@ -12,16 +12,9 @@ class Login(tk.Tk):
         self.open = True
         self.ventana("Iniciar Sesión", "INICIAR SESIÓN")
 
-    def ventana(self, titulo=None, texto=None):
-        if titulo is None:
-            self.titulo = "Ventana"
-        else:
-            self.titulo = titulo
-
-        if texto is None:
-            self.texto = "SAMPLE TEXT"
-        else:
-            self.texto = texto
+    def ventana(self, titulo="Ventana", texto="SAMPLE TEXT"):
+        self.titulo = titulo
+        self.texto = texto
 
         ancho = 350
         alto = 430
@@ -37,7 +30,6 @@ class Login(tk.Tk):
         self.title(titulo)
         self.add_contenido(self.texto)
         
-
     def add_contenido(self, titulo):
         # Titulo y Logo
         frame0 = tk.Frame(self)

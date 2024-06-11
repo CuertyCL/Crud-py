@@ -8,8 +8,6 @@ class Inicio(tk.Tk):
     def __init__(self):
         super().__init__()
         self.ventana("Menu Inicio", "MENÚ")
-        
-
 
     def ventana(self, titulo=None, texto=None):
         if titulo is None:

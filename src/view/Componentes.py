@@ -5,14 +5,14 @@ class Componente(tk.Frame):
     def __init__(self):
         super().__init__()
 
-    def add_formulario(self, titulo, isPasswd=None):
+    def add_formulario(self, titulo, isPasswd=False, ipadx=25):
         label = tk.Label(self, text=titulo, font="Impact 11")
-        if isPasswd is None or isPasswd == False:
+        if not isPasswd:
             self.entry = ttk.Entry(self)
         else:
             self.entry = ttk.Entry(self, show='*')
         label.grid(row=0, column=0, sticky="w")
-        self.entry.grid(row=1, column=0, ipadx=25)
+        self.entry.grid(row=1, column=0, ipadx=ipadx)
 
         self.pack(side="top", expand=True)
 

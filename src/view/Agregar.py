@@ -1,11 +1,11 @@
 import tkinter as tk
 import tkinter.ttk as ttk
-import Componentes as comp
+import view.Componentes as comp
 
 class Añadir(tk.Tk):
     def __init__(self):
         super().__init__()
-        self.ventana("Añadir Producto", "AÑADIR\nPRDUCTO")
+        self.ventana("Añadir Producto", "AÑADIR\nPRODUCTO")
 
     def ventana(self, titulo=None, texto=None):
         if titulo is None:
@@ -85,7 +85,7 @@ class Añadir(tk.Tk):
 
         # Botones
         botones = comp.Componente()
-        botones.add_triple_boton("Ver Inventario", "Confirmar", "Cancelar")
+        botones.add_triple_boton("Ver Inventario", "Confirmar", "Cancelar", comm1=self.destroy, comm2=self.destroy, comm3=self.destroy)
         botones.pack(side="top", expand=True)
         
 

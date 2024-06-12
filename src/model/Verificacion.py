@@ -7,7 +7,7 @@ class Verificacion:
 
     def verificar(usuario, contraseña):
         # Iniciar Conexion
-        conn = sqlite3.connect("usuarios.db")
+        conn = sqlite3.connect("./db/usuarios.db")
         cur = conn.cursor()
 
         h = hashlib.new("SHA256")

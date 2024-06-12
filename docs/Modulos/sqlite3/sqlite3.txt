@@ -1,0 +1,71 @@
+===============
+    Sqlite3
+===============
+
+-----------------------
+    ¿Qué es SQLite?
+-----------------------    
+
+SQLite es un Gestor de Base de Datos liviano el cual, a diferencia de otros gestores como PostgreSQL o MySQL, no necesita de un servidor para ser ejecutado y acceder a las bases de datos. A su vez, las Bases de Datos (DB) se gestionan como archivos, lo cual permite un manejo y traslado mucho mas comodo, ya que no se necesita reconfigurar la DB para que SQLite pueda trabajar con ella.
+
+----------------------------------------
+    ¿Cómo funciona SQLite en Python?
+----------------------------------------
+
+En Python, existe el módulo llamado "sqlite3", el cual permite conectarse a una base de datos y realizar consultas. Todo esto mediante cursores y transacciones
+
+----------------------------------
+    ¿Cómo me conecto a una DB?
+----------------------------------
+
+El proceso para conectarse a una DB con sqlite3 es simple.
+Primero que todo, declaramos una variable para establecer la conexión. Esto se logra de la siguiente manera:
+
+    con = sqlite3.connect(nombre_db)
+    
+Luego tenemos que declarar otra variable para crear un cursor:
+
+    cursor = con.cursor()
+    
+Ya con el cursor creado podemos ejecutar cualquier consulta SQL con el método "execute()":
+
+    cursor.execute(consulta_sql)
+   
+(Es importante aclarar que "execute()" ejecuta una sola consulta SQL. Para realizar múltiples consultas existe "executescript()")   
+   
+Esto solamente ejecutará la consulta, pero no se mostrará nada en pantalla.
+En el caso de que hayamos realizado un "SELECT ... FROM ...", podemos almacenar el resultado de esta consulta en una variable, y luego llamarla con "fetchone()" o "fetchall()":
+
+    resultado  = cursor.execute("SELECT ... FROM ...")
+    resultado.fetchone()
+    
+Al realizar esto se mostraría el resultado de la consulta, y a su vez indica que este resultado está almacenado en una variable la cual podremos utilizar más adelante.
+    
+-------------------------------------------------------------
+    ¿Cómo realizo consultas como INSERT, UPDATE y DELETE?
+-------------------------------------------------------------
+
+En caso de que queramos realizar este tipo de consultas, el proceso es similar, pero se tienen que cambiar unas cosas.
+Primero que todo, si la consulta es demasiado larga y queremos dividirla en varias lineas, tenemos que utilizar tres comillas en lugar de una sola de la siguiente manera:
+    cursor.execute("""INSERT INTO (columna1, columna2, ...)
+                        VALUES (dato1, dato2, ...), 
+                        (dato3, dato4, ....)
+                   """)
+                  
+Otra cosa a tener en cuenta es que, al ser la consulta de tipo DML, implicitamente se abre una transacción para realizar la consulta, por lo que luego de "execute()", hay que realizar un COMMIT con la variable de conexión:
+
+    cursor.execute("""INSERT INTO (columna1, columna2, ...)
+                        VALUES (dato1, dato2, ...), 
+                        (dato3, dato4, ....)
+                   """)
+    con.commit()
+    
+------------------------------------
+    ¿Cómo cierro las conexiones?
+------------------------------------
+
+Para cerrar las conexiones y cursores creados, se tienen que utilizar los siguientes métodos:
+
+    cursor.close()
+    con.close()
+

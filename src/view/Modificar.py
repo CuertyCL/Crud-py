@@ -2,6 +2,7 @@ import tkinter as tk
 import tkinter.ttk as ttk
 import model.Consultas as con
 import view.Componentes as comp
+import controller.Abrir as abrir
 
 class Modificar(tk.Tk):
     def __init__(self):
@@ -73,13 +74,17 @@ class Modificar(tk.Tk):
 
         b_agregar = ttk.Button(frame3, text="Agregar Producto")
         b_opciones = comp.Componente()
-        b_opciones.add_doble_boton("Aplicar Cambios", "Cancelar")
+        b_opciones.add_doble_boton("Aplicar Cambios", "Cancelar", comm2=self.volver_inicio)
 
 
         b_agregar.pack(side='left', ipady=6, ipadx=10, padx=30, pady=10)
         b_opciones.pack(side='right', padx=20)
 
         frame3.pack(side='top', expand=True, fill='both')
+
+    def volver_inicio(self):
+        self.destroy()
+        abrir.Abrir.abrir_menu()
 
 if __name__ == "__main__":
     root = Modificar()

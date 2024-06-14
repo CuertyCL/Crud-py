@@ -1,6 +1,7 @@
 import tkinter as tk
 import tkinter.ttk as ttk
 import view.Componentes as comp
+import controller.Abrir
 
 class Añadir(tk.Tk):
     def __init__(self):
@@ -27,7 +28,8 @@ class Añadir(tk.Tk):
         y = (self.winfo_screenheight()//2)-(alto//2)
 
         self.geometry('{}x{}+{}+{}'.format(ancho, alto, x, y))
-        self.resizable(False, False)
+        #self.resizable(False, False)
+        self.resizable(True, True)
 
         self.title(titulo)
         self.add_contenido(self.texto)
@@ -85,9 +87,12 @@ class Añadir(tk.Tk):
 
         # Botones
         botones = comp.Componente()
-        botones.add_triple_boton("Ver Inventario", "Confirmar", "Cancelar", comm1=self.destroy, comm2=self.destroy, comm3=self.destroy)
+        botones.add_triple_boton("Ver Inventario", "Confirmar", "Cancelar", comm1=self.destroy, comm2=self.destroy, comm3=self.cerrar_ventana)
         botones.pack(side="top", expand=True)
         
+    def cerrar_ventana(self):
+        self.destroy()
+        controller.Abrir.Abrir.abrir_menu()
 
 if __name__ == "__main__":
     root = Añadir()

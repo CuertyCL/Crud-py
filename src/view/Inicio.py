@@ -2,6 +2,8 @@ import tkinter as tk
 import tkinter.ttk as ttk
 from almacen.Verificador import Verificador
 import view.Componentes as comp
+import controller.Abrir as abrir
+
 
 VER = Verificador()
 
@@ -11,8 +13,7 @@ class Inicio(tk.Tk):
         self.ventana("Menu Inicio", "MENÚ")
 
     def ventana(self, titulo=None, texto=None):
-        if titulo is None:
-            self.titulo = "Ventana"
+        if titulo is None: self.titulo = "Ventana"
         else:
             self.titulo = titulo
 
@@ -47,13 +48,13 @@ class Inicio(tk.Tk):
         frame0.pack(side="top", expand=True)
 
         # Botones
-        b1 = ttk.Button(self, text="Ver\nInventario", command= lambda: VER.cerrar_ventana(self))
+        b1 = ttk.Button(self, text="Ver\nInventario", command=self.abrir_inventario)
         b1.pack(side="top", expand=True, ipady=6, ipadx=20)
 
-        b2 = ttk.Button(self, text="Modificar\nStock", command= lambda: VER.cerrar_ventana(self))
+        b2 = ttk.Button(self, text="Modificar\nStock", command=self.abrir_modificar)
         b2.pack(side="top", expand=True, ipady=6, ipadx=20)
 
-        b3 = ttk.Button(self, text="Añadir\nProducto", command= lambda: VER.cerrar_ventana(self))
+        b3 = ttk.Button(self, text="Añadir\nProducto", command=self.abrir_añadir_inventario)
         b3.pack(side="top", expand=True, ipady=6, ipadx=20)
 
         b4 = ttk.Button(self, text="Eliminar\nProducto", command= lambda: VER.cerrar_ventana(self))
@@ -65,11 +66,29 @@ class Inicio(tk.Tk):
                                 text2="Cerrar Sesión",
                                 text3="Salir",
                                 comm1=self.destroy,
-                                comm2=self.destroy,
+                                comm2=self.cerrar_sesion,
                                 comm3=self.destroy,
                                 padx=10)
 
         frame1.pack(side="top", expand=True)
+
+
+    def abrir_añadir_inventario(self):
+        self.destroy()
+        abrir.Abrir.abrir_añadir_inventario()
+
+    def abrir_modificar(self):
+        self.destroy()
+        abrir.Abrir.abrir_modificar_stock()
+
+    def abrir_inventario(self):
+        self.destroy()
+        abrir.Abrir.abrir_inventario()
+    
+    def cerrar_sesion(self):
+        self.destroy()
+        abrir.Abrir.abrir_login()
+
 
 if __name__ == "__main__":
     root = Inicio()

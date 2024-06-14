@@ -2,6 +2,7 @@ import tkinter as tk
 import tkinter.ttk as ttk
 from almacen.Verificador import Verificador
 from model.Verificacion import Verificacion
+import controller.Abrir
 
 VER = Verificador()
 
@@ -71,8 +72,7 @@ class Login(tk.Tk):
 
         frame2.pack(side="top", expand=True)
 
-        # Boton
-        # comando: command= lambda: Verificador.iniciarsesion(root, user, passwd)
+        # Boton Iniciar Sesión
         button = ttk.Button(self, text="Iniciar Sesión", command= lambda: self.iniciar_sesion(frame1, frame2, self.userentry, self.passwdentry))
         
         button.pack(side="top", expand=True, ipady=6, ipadx=10)
@@ -96,6 +96,7 @@ class Login(tk.Tk):
 
         if isuser and ispasswd:
             self.destroy()
+            controller.Abrir.Abrir.abrir_menu()
         elif isuser and not ispasswd:
             self.label_error_passwd = tk.Label(frame2, text="Contraseña incorrecta.\nVerifique que escribió bien la contraseña", fg="red")
             self.label_error_passwd.grid(row=2, column=0, pady=10)

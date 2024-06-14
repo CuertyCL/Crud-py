@@ -2,7 +2,7 @@ import tkinter as tk
 import tkinter.ttk as ttk
 from almacen.Verificador import Verificador
 from model.Verificacion import Verificacion
-import controller.Abrir
+import controller.Abrir as abrir
 
 VER = Verificador()
 
@@ -83,8 +83,9 @@ class Login(tk.Tk):
 
         isuser = False
         ispasswd = False
+        isadmin = False
 
-        isuser, ispasswd = Verificacion.verificar(usuario=user, contraseña=passwd)
+        isuser, ispasswd, isadmin= Verificacion.verificar(usuario=user, contraseña=passwd)
 
         if self.label_error_user:
             self.label_error_user.grid_forget()
@@ -96,7 +97,10 @@ class Login(tk.Tk):
 
         if isuser and ispasswd:
             self.destroy()
-            controller.Abrir.Abrir.abrir_menu()
+            if isadmin:
+                abrir.Abrir.abrir_menu()
+            else:
+                abrir.Abrir.abrir_menu_user()
         elif isuser and not ispasswd:
             self.label_error_passwd = tk.Label(frame2, text="Contraseña incorrecta.\nVerifique que escribió bien la contraseña", fg="red")
             self.label_error_passwd.grid(row=2, column=0, pady=10)

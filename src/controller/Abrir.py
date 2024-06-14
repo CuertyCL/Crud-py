@@ -3,6 +3,7 @@ from view.Inicio import Inicio
 from view.Agregar import Añadir
 from view.Modificar import Modificar
 from view.Inventario import Inventario
+from view.Inicio_user import InicioUser
 
 class Abrir():
     def __init__(self):
@@ -16,6 +17,9 @@ class Abrir():
 
     def abrir_menu():
         inicio = Inicio()
+
+    def abrir_menu_user():
+        inicio_user = InicioUser()
 
     def abrir_inventario():
         inventario = Inventario()

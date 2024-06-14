@@ -17,18 +17,27 @@ class Verificacion:
         passwd_hash = h.hexdigest()
 
         # Ejecuta la consulta para buscar al usuario
-        cur.execute("SELECT user, passwd FROM usuarios WHERE user = ?", (usuario,))
+        cur.execute("SELECT id, user, passwd FROM usuarios WHERE user = ?", (usuario,))
         res = cur.fetchone()
 
         # Finalizar Conexion
         cur.close()
         conn.close()
 
+        is_admin = False
+        user = False
+        passwd = False
+
         # Verificar si tanto usuario como contraseña son correctos
         if res is None:
-            return False, False 
-        elif res[1] == passwd_hash:
-            return True, True  
+            return user, passwd, is_admin
+        elif res[2] == passwd_hash:
+            if res[0]==1:
+                is_admin = True
+            user = True
+            passwd = True
+            return user, passwd, is_admin 
         else:
-            return True, False  
+            user = True
+            return user, passwd, id_user
 

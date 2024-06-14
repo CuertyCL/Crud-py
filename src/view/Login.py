@@ -1,6 +1,7 @@
 import tkinter as tk
 import tkinter.ttk as ttk
-from controller.Verificador import Verificador
+from almacen.Verificador import Verificador
+from model.Verificacion import Verificacion
 
 VER = Verificador()
 
@@ -10,6 +11,8 @@ class Login(tk.Tk):
         self.user = None
         self.passwd = None
         self.open = True
+        self.label_error_user = None
+        self.label_error_passwd = None
         self.ventana("Iniciar Sesión", "INICIAR SESIÓN")
 
     def ventana(self, titulo="Ventana", texto="SAMPLE TEXT"):
@@ -59,22 +62,52 @@ class Login(tk.Tk):
         labelpasswd.grid(row=0, column=0, sticky="w")
         self.passwdentry.grid(row=1, column=0, ipadx=25)
 
+        # Botón para mostrar/ocultar contraseña
+        show_password = tk.BooleanVar()
+        show_button = ttk.Checkbutton(frame2, variable=show_password, command= lambda: self.ver_passwd(show_password))
+        show_button.grid(row=1, column=1, padx=10)
+        
+        frame2.pack(side="top", expand=True)
+
         frame2.pack(side="top", expand=True)
 
         # Boton
         # comando: command= lambda: Verificador.iniciarsesion(root, user, passwd)
-        button = ttk.Button(self, text="Iniciar Sesión", command= lambda: VER.iniciarsesion(self, self.userentry, self.passwdentry))
+        button = ttk.Button(self, text="Iniciar Sesión", command= lambda: self.iniciar_sesion(frame1, frame2, self.userentry, self.passwdentry))
         
         button.pack(side="top", expand=True, ipady=6, ipadx=10)
 
-    def set_datos(self):
-        self.user = self.userentry.get()
-        self.passwd = self.passwdentry.get()
+    def iniciar_sesion(self, frame1, frame2, userentry, passwdentry):
+        user = userentry.get()
+        passwd = passwdentry.get()
 
-    def get_datos(self):
-        return self.user, self.passwd
+        isuser = False
+        ispasswd = False
 
-    def get_open(self):
-        return self.open
+        isuser, ispasswd = Verificacion.verificar(usuario=user, contraseña=passwd)
+
+        if self.label_error_user:
+            self.label_error_user.grid_forget()
+            self.label_error_user = None
+
+        if self.label_error_passwd:
+            self.label_error_passwd.grid_forget()
+            self.label_error_passwd = None
+
+        if isuser and ispasswd:
+            self.destroy()
+        elif isuser and not ispasswd:
+            self.label_error_passwd = tk.Label(frame2, text="Contraseña incorrecta.\nVerifique que escribió bien la contraseña", fg="red")
+            self.label_error_passwd.grid(row=2, column=0, pady=10)
+        else:
+            self.label_error_user = tk.Label(frame1, text="Usuario incorrecto.\nVerifique que escribió bien el usuario.", fg="red")
+            self.label_error_user.grid(row=2, column=0, pady=10)
+
+
+    def ver_passwd(self, show_passwd):
+        if show_passwd.get():
+            self.passwdentry.config(show="")
+        else:
+            self.passwdentry.config(show="*")
 
 

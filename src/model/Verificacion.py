@@ -5,6 +5,7 @@ class Verificacion:
     def __init__(self):
         pass
 
+    @staticmethod
     def verificar(usuario, contraseña):
         # Iniciar Conexion
         conn = sqlite3.connect("./db/usuarios.db")
@@ -15,17 +16,19 @@ class Verificacion:
 
         passwd_hash = h.hexdigest()
 
-        cur.execute("SELECT user, passwd FROM usuarios WHERE user = ? AND passwd = ?", (usuario, passwd_hash))
-
-        resultado = cur.fetchone()
+        # Ejecuta la consulta para buscar al usuario
+        cur.execute("SELECT user, passwd FROM usuarios WHERE user = ?", (usuario,))
+        res = cur.fetchone()
 
         # Finalizar Conexion
         cur.close()
         conn.close()
 
-        # Verificar si se encontró un resultado
-        if resultado is not None:
-            return True
-        return False
-    
+        # Verificar si tanto usuario como contraseña son correctos
+        if res is None:
+            return False, False 
+        elif res[1] == passwd_hash:
+            return True, True  
+        else:
+            return True, False  
 

@@ -1,7 +1,7 @@
 from view.Login import Login
 from view.Inicio import Inicio
 from view.Agregar import Añadir
-
+from view.Modificar import Modificar
 
 class Abrir():
     def __init__(self):
@@ -20,6 +20,10 @@ class Abrir():
 
     def abrir_inventario():
         pass
+
+    def abrir_modificar_stock():
+        modificar = Modificar()
+        modificar.mainloop()
 
     def abrir_añadir_inventario():
         añadir = Añadir()

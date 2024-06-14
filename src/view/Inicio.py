@@ -1,6 +1,7 @@
 import tkinter as tk
 import tkinter.ttk as ttk
-from controller.Verificador import Verificador
+from almacen.Verificador import Verificador
+import view.Componentes as comp
 
 VER = Verificador()
 
@@ -20,7 +21,7 @@ class Inicio(tk.Tk):
         else:
             self.texto = texto
 
-        ancho = 350
+        ancho = 360
         alto = 460
 
     # Posición en pantalla al iniciar
@@ -59,12 +60,14 @@ class Inicio(tk.Tk):
         b4.pack(side="top", expand=True, ipady=6, ipadx=20)
 
         # Botones Opciones y Cerrar Sesión
-        frame1 = tk.Frame(self)
-        b_op = ttk.Button(frame1, text="Opciones", command= lambda: VER.cerrar_ventana(self))
-        b_cs = ttk.Button(frame1, text="Cerrar Sesión", command= lambda: VER.cerrar_ventana(self))
-
-        b_op.pack(side="left", expand=True, ipady=6, ipadx=10, padx=20, pady=10)
-        b_cs.pack(side="left", expand=True, ipady=6, ipadx=10, padx=20, pady=10)
+        frame1 = comp.Componente()
+        frame1.add_triple_boton(text1="Opciones",
+                                text2="Cerrar Sesión",
+                                text3="Salir",
+                                comm1=self.destroy,
+                                comm2=self.destroy,
+                                comm3=self.destroy,
+                                padx=10)
 
         frame1.pack(side="top", expand=True)
 

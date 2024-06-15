@@ -1,6 +1,7 @@
 from view.Login import Login
 from view.Inicio import Inicio
 from view.Agregar import Añadir
+from view.Opciones import Opciones
 from view.Modificar import Modificar
 from view.Inventario import Inventario
 from view.Inicio_user import InicioUser
@@ -12,8 +13,8 @@ class Abrir():
     def abrir_login():
         login = Login()
 
-    def abrir_opciones():
-        pass
+    def abrir_opciones(root):
+        opciones = Opciones(root)
 
     def abrir_menu():
         inicio = Inicio()

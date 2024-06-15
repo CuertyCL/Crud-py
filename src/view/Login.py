@@ -1,10 +1,9 @@
 import tkinter as tk
 import tkinter.ttk as ttk
-from almacen.Verificador import Verificador
-from model.Verificacion import Verificacion
 import controller.Abrir as abrir
+import model.Verificacion as ver
 
-VER = Verificador()
+VER =ver.Verificacion()
 
 class Login(tk.Tk):
     def __init__(self):
@@ -65,12 +64,11 @@ class Login(tk.Tk):
 
         # Botón para mostrar/ocultar contraseña
         show_password = tk.BooleanVar()
-        show_button = ttk.Checkbutton(frame2, variable=show_password, command= lambda: self.ver_passwd(show_password))
-        show_button.grid(row=1, column=1, padx=10)
+        show_button = ttk.Checkbutton(frame2, text="Mostrar Contraseña", variable=show_password, command= lambda: self.ver_passwd(show_password))
+        show_button.grid(row=2, column=0, padx=10, sticky='w')
         
         frame2.pack(side="top", expand=True)
 
-        frame2.pack(side="top", expand=True)
 
         # Boton Iniciar Sesión
         button = ttk.Button(self, text="Iniciar Sesión", command= lambda: self.iniciar_sesion(frame1, frame2, self.userentry, self.passwdentry))
@@ -85,7 +83,7 @@ class Login(tk.Tk):
         ispasswd = False
         isadmin = False
 
-        isuser, ispasswd, isadmin= Verificacion.verificar(usuario=user, contraseña=passwd)
+        isuser, ispasswd, isadmin= VER.verificar(usuario=user, contraseña=passwd)
 
         if self.label_error_user:
             self.label_error_user.grid_forget()

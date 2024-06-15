@@ -2,8 +2,8 @@ import tkinter as tk
 import tkinter.ttk as ttk
 
 class Componente(tk.Frame):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, root=None):
+        super().__init__(root)
 
     def add_formulario(self, titulo, isPasswd=False, ipadx=25, side='top'):
         label = tk.Label(self, text=titulo, font="Impact 11")

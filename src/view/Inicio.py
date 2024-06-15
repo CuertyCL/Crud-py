@@ -65,7 +65,7 @@ class Inicio(tk.Tk):
         frame1.add_triple_boton(text1="Opciones",
                                 text2="Cerrar Sesión",
                                 text3="Salir",
-                                comm1=self.destroy,
+                                comm1=self.abrir_opciones,
                                 comm2=self.cerrar_sesion,
                                 comm3=self.destroy,
                                 padx=10)
@@ -84,6 +84,9 @@ class Inicio(tk.Tk):
     def abrir_inventario(self):
         self.destroy()
         abrir.Abrir.abrir_inventario()
+
+    def abrir_opciones(self):
+        abrir.Abrir.abrir_opciones(self)
     
     def cerrar_sesion(self):
         self.destroy()

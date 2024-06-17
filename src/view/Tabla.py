@@ -46,4 +46,4 @@ class Tabla():
         scrollbarh.place(relx=0, rely=1, relwidth=1, anchor='sw')
         table.configure(xscrollcommand=scrollbarh.set)
 
-        table.pack(expand=True, fill='both')
+        table.pack(expand=True, fill="both")

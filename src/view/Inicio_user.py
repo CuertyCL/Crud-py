@@ -1,11 +1,8 @@
 import tkinter as tk
 import tkinter.ttk as ttk
-from almacen.Verificador import Verificador
 import view.Componentes as comp
 import controller.Abrir as abrir
 
-
-VER = Verificador()
 
 class InicioUser(tk.Tk):
     def __init__(self):
@@ -59,7 +56,7 @@ class InicioUser(tk.Tk):
         frame1.add_triple_boton(text1="Opciones",
                                 text2="Cerrar Sesión",
                                 text3="Salir",
-                                comm1=self.destroy,
+                                comm1=self.abrir_opciones,
                                 comm2=self.cerrar_sesion,
                                 comm3=self.destroy,
                                 padx=10)
@@ -74,11 +71,14 @@ class InicioUser(tk.Tk):
         self.destroy()
         abrir.Abrir.abrir_inventario()
     
+    def abrir_opciones(self):
+        abrir.Abrir.abrir_opciones_user(self)
+
     def cerrar_sesion(self):
         self.destroy()
         abrir.Abrir.abrir_login()
 
 
 if __name__ == "__main__":
-    root = Inicio()
+    root = InicioUser()
     root.mainloop()

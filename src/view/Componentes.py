@@ -2,8 +2,15 @@ import tkinter as tk
 import tkinter.ttk as ttk
 
 class Componente(tk.Frame):
-    def __init__(self, root=None):
-        super().__init__(root)
+    def __init__(self, root=None, heigth=None, width=None):
+        if heigth is None and width is None:
+            super().__init__(root)
+        elif heigth is None and width is not None:
+            super().__init__(root,  width=width)
+        elif heigth is not None and width is None:
+            super().__init__(root,  height=heigth)
+        else:
+            super().__init__(root, height=heigth, width=width)
 
     def add_formulario(self, titulo, isPasswd=False, ipadx=25, side='top'):
         label = tk.Label(self, text=titulo, font="Impact 11")
@@ -16,13 +23,22 @@ class Componente(tk.Frame):
 
         self.pack(side=side, expand=True)
 
-    def add_lista(self, titulo, side='top'):
-        label = tk.Label(self, text=titulo, font="Impact 11")
-        combobox = ttk.Combobox(self, textvariable=None)
-        label.grid(row=0, column=0, sticky="w")
-        combobox.grid(row=1, column=0, ipadx=16, padx=1)
+    def get_entry(self):
+        return self.entry.get()
+
+    def add_lista(self, titulo, side='top', values=[], default="-- Selecciona uno --"):
+        self.label = tk.Label(self, text=titulo, font="Impact 11")
+        values.insert(0, default)
+        self.combobox = ttk.Combobox(self, textvariable=None)
+        self.combobox["values"] = values
+        self.combobox.current(0)
+        self.label.grid(row=0, column=0, sticky="w")
+        self.combobox.grid(row=1, column=0, ipadx=16, padx=1)
 
         self.pack(side=side, expand=True)
+
+    def get_selected_list(self):
+        return self.combobox.get()
 
     def add_doble_boton(self, text1=None, text2=None, comm1=None, comm2=None, ipady=6, ipadx=10, padx=20, pady=10, side='top'):
         frame = tk.Frame(self)
@@ -63,8 +79,8 @@ class Componente(tk.Frame):
                 
         # Encabezados
         for i in range(0, len(head)):
-            table.column(head[i], anchor='center')
-            table.heading(head[i], text=head[i])
+            table.column(head[i], anchor='center', width=80)
+            table.heading(head[i], text=head[i], anchor='center')
 
         # Datos
         for j in range(0, len(data)):

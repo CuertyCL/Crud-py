@@ -50,4 +50,3 @@ class Verificacion:
     
     def get_is_admin(self):
         return self.is_admin
-

@@ -1,32 +1,28 @@
 import tkinter as tk
+from tkinter import messagebox
 
-def cerrar_y_abrir():
-    global root  # Utilizamos global para poder destruir la ventana principal
-    
-    # Destruir la ventana principal
-    root.destroy()
+def abrir_otra_ventana():
+    otra_ventana = tk.Toplevel(root)
+    otra_ventana.title("Otra Ventana")
+    label = tk.Label(otra_ventana, text="Esta es otra ventana")
+    label.pack(padx=20, pady=20)
 
-    # Crear una nueva ventana
-    nueva_ventana = tk.Tk()
-    nueva_ventana.title("Nueva Ventana")
-    nueva_ventana.geometry("300x200")
-
-    # Contenido de la nueva ventana
-    label = tk.Label(nueva_ventana, text="¡Nueva ventana abierta!")
-    label.pack(pady=20)
-
-    # Botón para cerrar la nueva ventana
-    btn_cerrar = tk.Button(nueva_ventana, text="Cerrar", command=nueva_ventana.destroy)
-    btn_cerrar.pack()
+def on_closing():
+    respuesta = messagebox.askokcancel("Salir", "¿Seguro que quieres salir?")
+    if not respuesta:
+        abrir_otra_ventana()  # Abrir otra ventana antes de cerrar
+        root.destroy()
 
 # Crear la ventana principal
 root = tk.Tk()
 root.title("Ventana Principal")
-root.geometry("300x200")
 
-# Botón para cerrar la ventana actual y abrir una nueva
-btn_abrir_nueva_ventana = tk.Button(root, text="Abrir Nueva Ventana", command=cerrar_y_abrir)
-btn_abrir_nueva_ventana.pack(pady=20)
+# Configurar la acción al cerrar la ventana
+root.protocol("WM_DELETE_WINDOW", on_closing)
 
-# Ejecutar el bucle principal de la ventana
+# Contenido de la ventana principal
+label = tk.Label(root, text="Presiona la 'X' para cerrar la ventana principal")
+label.pack(padx=20, pady=20)
+
+# Ejecutar el bucle principal de la aplicación
 root.mainloop()

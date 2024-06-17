@@ -4,4 +4,4 @@ import view.Opciones
 
 if __name__ == "__main__":
     login = view.Login.Login()
-    login.mainloop()    
+    login.mainloop()

@@ -5,6 +5,7 @@ from view.Opciones import Opciones
 from view.Modificar import Modificar
 from view.Inventario import Inventario
 from view.Inicio_user import InicioUser
+from view.Opciones_user import OpcionesUser
 
 class Abrir():
     def __init__(self):
@@ -15,6 +16,9 @@ class Abrir():
 
     def abrir_opciones(root):
         opciones = Opciones(root)
+
+    def abrir_opciones_user(root):
+        opciones_user = OpcionesUser(root)
 
     def abrir_menu():
         inicio = Inicio()

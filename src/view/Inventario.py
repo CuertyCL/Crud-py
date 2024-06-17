@@ -1,10 +1,13 @@
 import tkinter as tk
 import tkinter.ttk as ttk
+import model.Consultas as con
+import view.Componentes as comp
 import controller.Abrir as abrir
 
 class Inventario(tk.Tk):
     def __init__(self):
         super().__init__()
+        self.protocol("WM_DELETE_WINDOW", self.cerrar_ventana)
         self.add_ventana()
 
     def add_ventana(self):
@@ -35,9 +38,13 @@ class Inventario(tk.Tk):
 
 
         # Lista de productos
-        lista = ["Columna 1", "Columna 2", "Columna 3", "Columna 4", "Columna 5"]
+        tabla = "inventario"
+        consultas = con.Consultas("./db/inventario.db")
+        head = consultas.get_title(tabla)
+        head.insert(0, "-- Selecciona una Columna --")
 
-        combo = ttk.Combobox(self, values=lista)
+        combo = ttk.Combobox(self, values=head)
+        combo.current(0)
 
         combo.grid(row=0, column=1)
 
@@ -45,19 +52,34 @@ class Inventario(tk.Tk):
         fbotones = tk.Frame(self, highlightbackground="gray", highlightthickness=4)
         fbotones.grid(row=1, column=0, sticky="nsew", padx=15, pady=15)
 
-        b1 = ttk.Button(fbotones, text="Filtrar")
+        b1 = ttk.Button(fbotones, text="Ver Todas\nlas Tablas")
         b1.pack(side="top", expand=True, ipady=6, ipadx=10)
 
-        b2 = ttk.Button(fbotones, text="Generar\nLista")
+        b2 = ttk.Button(fbotones, text="Filtrar")
         b2.pack(side="top", expand=True, ipady=6, ipadx=10)
 
+        b3 = ttk.Button(fbotones, text="Generar\nLista")
+        b3.pack(side="top", expand=True, ipady=6, ipadx=10)
+
+        b4 = ttk.Button(fbotones, text="Enviar Lista\nal Correo")
+        b4.pack(side="top", expand=True, ipady=6, ipadx=10)
+
+
+        # Contenedor para la tabla
+        ftabla_wrapper = tk.Frame(self)
+        ftabla_wrapper.grid(row=1, column=1, sticky="nsew", padx=15, pady=15)
 
         # Tabla
-        ftabla = tk.Frame(self)
-        ftabla.grid(row=1, column=1, sticky="nsew", padx=15)
+        ftabla = comp.Componente(ftabla_wrapper)  # Pasar ftabla_wrapper como padre
 
-        label = tk.Label(ftabla, bg="red")
-        label.pack(expand=True, fill="both")
+        tabla = "inventario"
+        head = consultas.get_title(tabla)
+        data = consultas.get_data(tabla)
+
+        ftabla.create_table(head=head, data=data, side='right')  # Posiciona la tabla a la derecha
+
+        ftabla.pack(expand=True, fill='both')
+
 
         # Boton Volver
         bsalir = ttk.Button(self, text="Volver", command=self.cerrar_ventana)

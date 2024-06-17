@@ -101,7 +101,7 @@ class Login(tk.Tk):
                 abrir.Abrir.abrir_menu_user()
         elif isuser and not ispasswd:
             self.label_error_passwd = tk.Label(frame2, text="Contraseña incorrecta.\nVerifique que escribió bien la contraseña", fg="red")
-            self.label_error_passwd.grid(row=2, column=0, pady=10)
+            self.label_error_passwd.grid(row=3, column=0, pady=10)
         else:
             self.label_error_user = tk.Label(frame1, text="Usuario incorrecto.\nVerifique que escribió bien el usuario.", fg="red")
             self.label_error_user.grid(row=2, column=0, pady=10)

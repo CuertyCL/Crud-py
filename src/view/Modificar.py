@@ -7,6 +7,7 @@ import controller.Abrir as abrir
 class Modificar(tk.Tk):
     def __init__(self):
         super().__init__()
+        self.protocol("WM_DELETE_WINDOW", self.cerrar_ventana)
         self.ventana(titulo="Modificar Stock", texto="MODIFICAR STOCK")
 
     def ventana(self, titulo="Ventana", texto="SAMPLE TEXT"):
@@ -62,8 +63,8 @@ class Modificar(tk.Tk):
         tabla = "inventario"
 
         consultas = con.Consultas("./db/inventario.db")
-        data = consultas.get_data(tabla)
         head = consultas.get_title(tabla)
+        data = consultas.get_data(tabla)
 
         frame2.create_table(head=head, data=data)
         
@@ -74,7 +75,7 @@ class Modificar(tk.Tk):
 
         b_agregar = ttk.Button(frame3, text="Agregar Producto")
         b_opciones = comp.Componente()
-        b_opciones.add_doble_boton("Aplicar Cambios", "Cancelar", comm2=self.volver_inicio)
+        b_opciones.add_doble_boton("Aplicar Cambios", "Cancelar", comm2=self.cerrar_ventana)
 
 
         b_agregar.pack(side='left', ipady=6, ipadx=10, padx=30, pady=10)
@@ -82,7 +83,7 @@ class Modificar(tk.Tk):
 
         frame3.pack(side='top', expand=True, fill='both')
 
-    def volver_inicio(self):
+    def cerrar_ventana(self):
         self.destroy()
         abrir.Abrir.abrir_menu()
 

@@ -3,9 +3,9 @@ import tkinter.ttk as ttk
 import view.Componentes as comp
 import model.Verificacion as ver
 
-ADMIN = ver.Verificacion()
+VER = ver.Verificacion()
 
-class Opciones(tk.Toplevel):
+class OpcionesUser(tk.Toplevel):
     def __init__(self, root=None):
         super().__init__(root)
         self.ventana()
@@ -14,7 +14,7 @@ class Opciones(tk.Toplevel):
         self.title(titulo)
 
         ancho = 500
-        alto = 350
+        alto = 300
 
         # Posición en pantalla al iniciar
         # La posicion de la ventana al iniciar será en el centro  
@@ -42,7 +42,7 @@ class Opciones(tk.Toplevel):
         frame1 = tk.Frame(self)
 
         label_nombre_usuario = tk.Label(frame1, text="Nombre de\nUsuario")
-        label_user = tk.Label(frame1, text=ADMIN.get_nombre())
+        label_user = tk.Label(frame1, text=VER.get_nombre())
         botones = comp.Componente(frame1)
         botones.add_doble_boton(text1="Cambiar\nNombre",
                                 text2="Cambiar\nContraseña")
@@ -53,21 +53,16 @@ class Opciones(tk.Toplevel):
 
         frame1.pack(side='top', expand=True, fill='both')
 
-        # Botones Crear/Eliminar Cuenta
-
-        b_cuenta = comp.Componente(self)
-        b_cuenta.add_doble_boton(text1="Crear Cuenta",
-                                 text2="Eliminar Cuenta")
-        b_cuenta.pack(side="top", expand=True, fill="both")
-
         # Boton Volver
         frame2 = tk.Frame(self)
 
         b_volver = ttk.Button(frame2, text="Volver", command=self.destroy)
-        b_volver.pack(side='right', ipady=6, ipadx=10, padx=30, pady=10)
+        b_volver.pack(side='right', ipady=6, ipadx=10, padx=30)
 
         frame2.pack(side='top', expand=True, fill='both')
+    
+
 
 if __name__ == "__main__":
-    op = Opciones()
+    op = OpcionesUser()
     op.mainloop()

@@ -6,6 +6,7 @@ from view.Modificar import Modificar
 from view.Inventario import Inventario
 from view.Inicio_user import InicioUser
 from view.Opciones_user import OpcionesUser
+from view.Eliminar import Eliminar
 
 class Abrir():
     def __init__(self):
@@ -37,7 +38,8 @@ class Abrir():
         
 
     def abrir_eliminar_inventario():
-        pass
+        eliminar = Eliminar()
+        eliminar.mainloop()
 
     def abrir_añadir_producto():
         pass

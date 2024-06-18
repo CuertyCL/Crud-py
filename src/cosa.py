@@ -1,28 +1,25 @@
 import tkinter as tk
-from tkinter import messagebox
+from tkinter import ttk
 
-def abrir_otra_ventana():
-    otra_ventana = tk.Toplevel(root)
-    otra_ventana.title("Otra Ventana")
-    label = tk.Label(otra_ventana, text="Esta es otra ventana")
-    label.pack(padx=20, pady=20)
-
-def on_closing():
-    respuesta = messagebox.askokcancel("Salir", "¿Seguro que quieres salir?")
-    if not respuesta:
-        abrir_otra_ventana()  # Abrir otra ventana antes de cerrar
-        root.destroy()
+# Función que se ejecuta cuando se selecciona un elemento del ComboBox
+def on_select(event):
+    selected_item = combo.get()
+    label.config(text=f"Seleccionaste: {selected_item}")
 
 # Crear la ventana principal
 root = tk.Tk()
-root.title("Ventana Principal")
+root.title("ComboBox Ejemplo")
 
-# Configurar la acción al cerrar la ventana
-root.protocol("WM_DELETE_WINDOW", on_closing)
+# Crear un ComboBox
+combo = ttk.Combobox(root, values=["Opción 1", "Opción 2", "Opción 3", "Opción 4"])
+combo.pack(pady=10)
 
-# Contenido de la ventana principal
-label = tk.Label(root, text="Presiona la 'X' para cerrar la ventana principal")
-label.pack(padx=20, pady=20)
+# Configurar el evento de selección
+combo.bind("<<ComboboxSelected>>", on_select)
+
+# Crear una etiqueta para mostrar la selección
+label = tk.Label(root, text="Selecciona una opción")
+label.pack(pady=10)
 
 # Ejecutar el bucle principal de la aplicación
 root.mainloop()

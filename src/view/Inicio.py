@@ -59,7 +59,7 @@ class Inicio(tk.Tk):
         b3 = ttk.Button(self, text="Añadir\nProducto", command=self.abrir_añadir_inventario)
         b3.pack(side="top", expand=True, ipady=6, ipadx=20)
 
-        b4 = ttk.Button(self, text="Eliminar\nProducto", command= lambda: VER.cerrar_ventana(self))
+        b4 = ttk.Button(self, text="Eliminar\nProducto", command=self.abrir_eliminar_inventario)
         b4.pack(side="top", expand=True, ipady=6, ipadx=20)
 
         # Botones Opciones y Cerrar Sesión
@@ -78,6 +78,10 @@ class Inicio(tk.Tk):
     def abrir_añadir_inventario(self):
         self.destroy()
         abrir.Abrir.abrir_añadir_inventario()
+
+    def abrir_eliminar_inventario(self):
+        self.destroy()
+        abrir.Abrir.abrir_eliminar_inventario()
 
     def abrir_modificar(self):
         self.destroy()

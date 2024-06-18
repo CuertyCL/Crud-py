@@ -26,7 +26,7 @@ class Componente(tk.Frame):
     def get_entry(self):
         return self.entry.get()
 
-    def add_lista(self, titulo, side='top', values=[], default="-- Selecciona uno --"):
+    def add_lista(self, titulo=None, side='top', values=[], default="-- Selecciona uno --"):
         self.label = tk.Label(self, text=titulo, font="Impact 11")
         values.insert(0, default)
         self.combobox = ttk.Combobox(self, textvariable=None)
